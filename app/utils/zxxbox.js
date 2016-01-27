@@ -1,24 +1,28 @@
 angular.module('WeiXin.WebApp.Mobile.Utils.Zxxbox', [
 	['/bower_components/jquery.zxxbox.3.0.js']
-]).factory('ZxxboxFactory', function(){
-	return {
-		zxxbox: function(msg, opts) {
-			var defOpt = {
-				delay: 1500,
-				btnclose: false,
-				title: '',
-				bg: false
-			};
-			var elem;
-			if (typeof msg === 'string') {
-				elem = $('<span>' + msg + '</span>');
-			} else {
-				elem = msg;
-			}
-			opts = $.extend({}, defOpt, opts || {});
-			return elem.zxxbox(opts);
-		}
+]).provider('Zxxbox', function(){
+	this.defaultCfg = {
+		delay   : 1500,
+		btnclose: false,
+		title   : '',
+		bg      : false
 	};
+	this.setDefaultCfg = function(cfg){
+		angular.extend(this.defaultCfg, cfg);
+		return this.defaultCfg;
+	};
+	this.$get = function(){
+		var self = this, cfg = self.defaultCfg;
+		return {
+			zxxbox: function(msg, configs) {
+				var elem = (typeof msg === 'string') 
+					? $('<span>' + msg + '</span>')
+					: msg;
+				configs = $.extend({}, cfg, configs || {});
+				return elem.zxxbox(configs);
+			}
+		};	
+	}
 }).config(function() {
   console.warn('config WeiXin.WebApp.Mobile.Utils.Zxxbox');
 }).config(['$ocLazyLoadProvider', function($ocLazyLoadProvider) {

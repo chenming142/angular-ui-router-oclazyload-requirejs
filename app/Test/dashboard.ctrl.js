@@ -2,7 +2,7 @@
 var app = angular.module('WeiXin.WebApp.Mobile.Test');
 
 // Defining angular controller
-app.controller('DashboardController', function($scope, ZxxboxFactory){
+app.controller('DashboardController', function($scope, Zxxbox){
 	$scope.data = {'a': '---a---'};
-	ZxxboxFactory.zxxbox("---DashboardController---");
+	Zxxbox.zxxbox("---DashboardController---");
 });	

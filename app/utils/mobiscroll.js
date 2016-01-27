@@ -78,16 +78,10 @@ angular.module("WeiXin.WebAPP.Mobile.Utils.Mobiscroll", [
 				var width = $scope.width,height = $scope.height;
 				$scope.PCDInfo = $scope.PCDInfo || {};
 				
-				$scope.$watch("info", function(info){
+				$scope.$watch("PCDNames", function(info){
 					$('#PCDInfo').val(info);
 				});
-				//根据传入的PCDInfo，设置该PCDNames信息
-				function setPCDNames(PCD){
-					PCD = typeof PCD === 'string' ? PCD : PCD.join(" ");
-					PCDInfo.getPCDNames(PCD).then(function(val) {
-						$('#PCDInfo').val(val);
-					});
-				}
+				
 				//根据传入的Id，设置该PCDInfo信息
 				function setPCDInfoById( id ){
 					var PCD = [], def = $q.defer();
@@ -105,6 +99,13 @@ angular.module("WeiXin.WebAPP.Mobile.Utils.Mobiscroll", [
 						def.resolve(PCD);
 					});
 					return def.promise;
+				}
+				//根据传入的Id，设置该PCDNames信息
+				function setPCDNames(PCD){
+					PCD = typeof PCD === 'string' ? PCD : PCD.join(" ");
+					PCDInfo.getPCDNames(PCD).then(function(val) {
+						$('#PCDInfo').val(val);
+					});
 				}
 				//根据传入的Id，获取该PCDInfo信息
 				function getPCDInfoById( id ){
