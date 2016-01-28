@@ -1,6 +1,4 @@
 define(['angular', 'uiRouter', 'oclazyload','ngResrouce'], function (angular) {
-	angular.module('WeiXin.WebApp.Mobile.Utils', []);
-
 	// #2 Defining the angular module name and it's dependeny array
     var app = angular.module('WeiXin.WebApp.Mobile.InitConfig', ['ui.router','oc.lazyLoad']);
 
@@ -16,20 +14,46 @@ define(['angular', 'uiRouter', 'oclazyload','ngResrouce'], function (angular) {
             });
 
             // #7 All unmatched urls end up here
-            $urlRouterProvider.otherwise('/index');
-			$locationProvider.hashPrefix('!');
+            $urlRouterProvider.otherwise('/page');
+			//$locationProvider.hashPrefix('!');
 			
 			//通过ocLL加载公共模块
+			//公共的Factory|Service|constant
+			$ocLazyLoadProvider.config({
+				modules: [{
+					name: 'WeiXin.WebApp.Mobile.Utils.Common',
+					files: ['/app/utils/common.js']
+				}]
+			});
+			//Modal
+			$ocLazyLoadProvider.config({
+				modules: [{
+					name: 'WeiXin.WebApp.Mobile.Utils.Modal',
+					files: ['/app/utils/modal.js']
+				}]
+			});
+			//Zxxbox
 			$ocLazyLoadProvider.config({
 				modules: [{
 					name: 'WeiXin.WebApp.Mobile.Utils.Zxxbox',
 					files: ['/app/utils/zxxbox.js']
 				}]
 			});
+			//Mobiscroll
 			$ocLazyLoadProvider.config({
 				modules: [{
 					name: 'WeiXin.WebAPP.Mobile.Utils.Mobiscroll',
 					files: ['/app/utils/mobiscroll.js', '/app/address/address.js']
+				}]
+			});
+			//scrollEvt
+			$ocLazyLoadProvider.config({
+				modules: [{
+					name: 'WeiXin.WebAPP.Mobile.Utils.ScrollEvt',
+					files: [
+						'/app/utils/scrollEvt/scrollEvt.js', 
+						'/app/utils/scrollEvt/scrollEvt.css'
+					]
 				}]
 			});
 
@@ -40,7 +64,7 @@ define(['angular', 'uiRouter', 'oclazyload','ngResrouce'], function (angular) {
                     templateUrl: 'index.html'
                 })
 
-                .state('Test', {
+                .state('test', {
 					// This is the abstract base layout/template state
 					abstract: true,
 					templateUrl: "app/Test/base.tpl.html",
@@ -48,38 +72,52 @@ define(['angular', 'uiRouter', 'oclazyload','ngResrouce'], function (angular) {
                     resolve: {
                         load: function($ocLazyLoad) {
                             return $ocLazyLoad.load ({
-                                name: 'Test',
+                                name: 'test',
                                 files: ['app/Test/base.ctrl.js']
                             });
                         }
                     }
                 })
-                .state('Test.dashboard', {
-                    url: '/Test/dashboard',
+                .state('test.dashboard', {
+                    url: '/test/dashboard',
                     templateUrl: 'app/Test/dashboard.tpl.html',
 				    controller: 'DashboardController',
                     resolve: {
                         load: function($ocLazyLoad) {
                             return $ocLazyLoad.load({
-                                name: 'Test',
+                                name: 'test',
                                 files: ['app/Test/dashboard.ctrl.js']
                             });
                         }
                     }
                 })
-                .state('Test.listing', {
-                    url: '/Test/listing',
+                .state('test.listing', {
+                    url: '/test/listing',
                     templateUrl: 'app/Test/listing.tpl.html',
 				    controller: 'ListingController',
                     resolve: {
                         load: function($ocLazyLoad) {
                             return $ocLazyLoad.load({
-                                name: 'Test',
+                                name: 'test',
                                 files: ['app/Test/listing.ctrl.js']
                             });
                         }
                     }
-                });
+                })
+			
+				.state('page', {
+					url: '/page',
+					templateUrl: "app/Page/page.tpl.html",
+				    controller: 'pageController',
+				    controllerAs: 'page',
+                    resolve: {
+                        load: function($ocLazyLoad) {
+                            return $ocLazyLoad.load ({
+                                files: ['app/Page/page.ctrl.js']
+                            });
+                        }
+                    }
+				})
 			
 			// Without server side support html5 must be disabled.
     		$locationProvider.html5Mode(false);

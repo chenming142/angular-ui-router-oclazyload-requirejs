@@ -58,7 +58,7 @@ angular.module("WeiXin.WebAPP.Mobile.Utils.Mobiscroll", [
 			}
 		};
 	}])
-	.directive('mobiscrollWidget', ['PCDInfo', 'Address', '$q', '$timeout', function(PCDInfo, Address, $q, $timeout){
+	.directive('imybestMobiscroll', ['PCDInfo', 'Address', '$q', '$timeout', function(PCDInfo, Address, $q, $timeout){
 		return {
 			restrict: 'E',
 			scope: {
