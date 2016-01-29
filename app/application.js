@@ -18,6 +18,13 @@ define(['angular', 'uiRouter', 'oclazyload','ngResrouce'], function (angular) {
 			//$locationProvider.hashPrefix('!');
 			
 			//通过ocLL加载公共模块
+			//公共的ES5扩展或内置方法增强
+			$ocLazyLoadProvider.config({
+				modules: [{
+					name: 'WeiXin.WebApp.Mobile.Utils.Lang',
+					files: ['/app/utils/lang.js']
+				}]
+			});
 			//公共的Factory|Service|constant
 			$ocLazyLoadProvider.config({
 				modules: [{
@@ -53,6 +60,15 @@ define(['angular', 'uiRouter', 'oclazyload','ngResrouce'], function (angular) {
 					files: [
 						'/app/utils/scrollEvt/scrollEvt.js', 
 						'/app/utils/scrollEvt/scrollEvt.css'
+					]
+				}]
+			});
+			//vgSrc
+			$ocLazyLoadProvider.config({
+				modules: [{
+					name: 'WeiXin.WebAPP.Mobile.Utils.vgSrc',
+					files: [
+						'/app/utils/vgSrc.js'
 					]
 				}]
 			});

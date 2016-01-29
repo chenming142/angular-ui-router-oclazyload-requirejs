@@ -65,5 +65,5 @@ angular.module('WeiXin.WebApp.Mobile.Utils.Common', [])
 					scope.$apply(fn);
 				}
 			}
-		}
+		};
 	}]);

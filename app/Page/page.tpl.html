@@ -1,3 +1,49 @@
+<style>
+	body {background-color: #ddd;}
+    img {width: 100px;}
+    li{display: inline-block;}
+    .bd {border: 3px solid transparent;}
+    .bd-red {border-color: red;}
+    .bd-black {border-color: black;}
+    .bd-blue {border-color: blue;}
+</style>
+<section>
+	<div>
+		<h3>error images - {{page.errorImg}}</h3>
+		<img vg-src="'error'" error="page.errorImg" alt="">
+		<img vg-src="'error'" error="'http://ico.ooopic.com/iconset01/status-icons/gif/99494.gif'" alt="">
+		<img vg-src="'error'" alt="">
+	</div>
+	<div>
+		<h3>empty images</h3>
+		<img vg-src="" empty="page.emptyImg" alt="">
+		<img vg-src="" empty="" alt="">
+		<img vg-src="" alt="">
+	</div>
+	<div>
+		<h3>apply classes</h3>
+		<img vg-src="page.currentImg" class="bd" loading-cls="bd-black" loaded-cls="bd-blue" error-cls="bd-red">
+		<img vg-src="" class="bd" empty-cls="bd-red">
+	</div>
+	<div>
+		<h3>loading status</h3>
+		<img vg-src="'http://attach.bbs.miui.com/forum/201402/21/115851hrri63as3jifr4aq.jpg.thumb.jpg'" loading="page.loadingImg" alt="">
+		<img vg-src="'http://attach.bbs.miui.com/forum/201402/21/115850aoo868b0262obozi.jpg.thumb.jpg'" loading="'http://ico.ooopic.com/iconset01/status-icons/gif/99494.gif'" alt="">
+		<img vg-src="'http://attach.bbs.miui.com/forum/201402/21/115848qhswo1ooivwwwwch.jpg.thumb.jpg'" alt="">
+	</div>
+	<div>
+		<h3>events</h3>
+		<img vg-src="page.currentImg" on-begin="page.log(src)" on-load="page.log(src)" on-error="page.log('error')">
+	</div>
+	<div>
+		<h3>in ng-repeat</h3>
+		<ul>
+			<li ng-repeat="img in page.imgList">
+				<img vg-src="img" alt="">
+			</li>
+		</ul>
+	</div>
+</section>
 <p>page.tpl.html</p>
 <ul>
 	<li ng-repeat="p in page.result">
